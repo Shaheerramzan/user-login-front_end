@@ -7,6 +7,13 @@ export const USER_LOGIN = gql`
     }
   }
 `;
+export const USER_LOGOUT = gql`
+  mutation UserLogout($token: String!) {
+    userLogout(token: $token) {
+      status
+    }
+  }
+`;
 export const USER_SIGNUP = gql`
   mutation UserSignUp($email: String!, $password: String!, $name: String!) {
     userSignUp(email: $email, password: $password, name: $name) {

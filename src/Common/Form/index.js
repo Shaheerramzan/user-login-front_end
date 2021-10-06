@@ -13,6 +13,7 @@ import { Redirect } from "react-router-dom";
 
 function LoginForm({ formType, setAlert }) {
   const [email, setEmail] = useState("");
+  const [token, setToken] = useState(TokenProfile.getToken());
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [userLogin, { data: loginData, loading: loginLoading }] =
@@ -28,10 +29,12 @@ function LoginForm({ formType, setAlert }) {
     if (formType === "login") {
       if (loginData) {
         const { userLogin } = loginData;
-        const token = userLogin ? userLogin.token : userLogin;
-        if (token) {
-          console.log(token);
-          TokenProfile.setToken(token);
+        // setToken(userLogin ?  : userLogin);
+        if (userLogin) {
+          const { token: userToken } = userLogin;
+          console.log(userToken);
+          TokenProfile.setToken(userToken);
+          setToken(userToken);
           setAlert(false);
         } else {
           setAlert(true);
